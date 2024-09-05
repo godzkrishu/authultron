@@ -6,12 +6,12 @@ const auth = async(req,res,next)=>
 {
   const stamp = req.header('stamp')// req ke body nhi header se stamp nikalo
   if(!stamp)//if stamp not found
-    return res.stamp(401).json({msg:"no token ,Unauthorized access"});
+    return res.status(401).json({msg:"no token ,Unauthorized access"});
 
     //if found
    const verifyStamp = jwt.verify(stamp,"secretkey") //verify stamp
      if(!verifyStamp)//if not verified
-       return res.stamp(401).json({msg:"token is unauthorized"})
+       return res.status(401).json({msg:"token is unauthorized"})
     //if verifyied then send data to body\
     req.user= verifyStamp.id;
     req.stamp=stamp;
